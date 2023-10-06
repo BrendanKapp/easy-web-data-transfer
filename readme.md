@@ -14,3 +14,7 @@ Visit `ip:5000` in a web broswer.
 
 For data: type in a filename and the text data then click `Submit`.
 For files: click `Choose File`, select the file, and click `Upload`.
+
+## Example
+
+![demo](demo.png)
