@@ -24,15 +24,22 @@ def index():
             data_file = request.files["data_file"]
             if data_file.filename != "":
                 filename = os.path.join(app.config["UPLOAD_FOLDER"], data_file.filename)
+                if os.path.exists(filename):
+                    return render_template("index.html", data="", name="", result="Error: file already exists")
                 data_file.save(filename)
                 return render_template("index.html", data="", name="", result=("Saved file to: " + filename))
         # check if there is a text upload
-        data = request.form["data"]
-        name = request.form["name"]
-        success, message = save_text(data, name)
-        if success == False:
-            return render_template("index.html", data=data, name=name, result="Error: " + message)
-        return render_template("index.html", data="", name="", result=("Saved data to: " + name + ".txt"))
+        if "data" in request.form and "name" in request.form:
+            data = request.form["data"]
+            name = request.form["name"]
+            if data == "":
+                return render_template("index.html", data=data, name=name, result="Error: please input data")
+            if name == "":
+                return render_template("index.html", data=data, name=name, result="Error: please input filename")
+            success, message = save_text(data, name)
+            if success == False:
+                return render_template("index.html", data=data, name=name, result="Error: " + message)
+            return render_template("index.html", data="", name="", result=("Saved data to: " + name + ".txt"))
     return render_template("index.html", data="", name="", result="No Data Saved")
 
 if __name__ == "__main__":
