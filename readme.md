@@ -1,4 +1,4 @@
-# Easy File Transfer
+# Easy Web File Transfer
 
 I threw this together in a few minutes to transfer some data from old devices to my PC quickly. Turned out surprisingly helpful.
 
